@@ -1,327 +1,294 @@
+# MEMO Finance Tracker 中文版 / Chinese Edition
+
 > [!IMPORTANT]
-> This repository contains an independent Chinese localization derived from
-> [LuMeX88/MEMO-Finance-Tracker](https://github.com/LuMeX88/MEMO-Finance-Tracker).
-> It adds Simplified Chinese, CNY/RMB support, Chinese receipt OCR, and related
-> mobile layout fixes. It is not affiliated with or endorsed by the upstream
-> maintainer. The original and modified code remain licensed under GNU GPL v3;
-> see [LICENSE](LICENSE), [NOTICE.md](NOTICE.md), and the source history.
+> **非官方中文衍生版。** 本项目由 [aemediatodd](https://github.com/aemediatodd)
+> 独立维护，基于 [LuMeX88/MEMO-Finance-Tracker](https://github.com/LuMeX88/MEMO-Finance-Tracker)
+> 修改，并未获得上游作者的官方认可或背书。
+>
+> **Unofficial Chinese derivative.** This repository is independently maintained
+> by [aemediatodd](https://github.com/aemediatodd), based on
+> [LuMeX88/MEMO-Finance-Tracker](https://github.com/LuMeX88/MEMO-Finance-Tracker),
+> and is not affiliated with or endorsed by the upstream maintainer.
 
 <div align="center">
 
-# 💰 MEMO – Finance Tracker
-
-### *own your finances*
-
-**M**oney · **E**xpense · **M**anagement · **O**verview
-
-A modern, lightweight, **local-first** personal finance tracker that runs as a
-**Home Assistant add-on** — no cloud, no subscriptions, no telemetry. Everything
-lives in a local SQLite database on your own hardware, and your key finance
-metrics are published to Home Assistant as **MQTT sensors** for dashboards and
-automations.
-
-[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)](LICENSE)
-&nbsp;
-[![Home Assistant Add-on](https://img.shields.io/badge/Home%20Assistant-Add--on-41BDF5?logo=home-assistant&logoColor=white)](https://www.home-assistant.io/)
-&nbsp;
+![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg)
+![Home Assistant Add-on](https://img.shields.io/badge/Home%20Assistant-Add--on-41BDF5?logo=home-assistant&logoColor=white)
 ![Version](https://img.shields.io/badge/version-1.4.0--cn.1-success.svg)
-&nbsp;
-![Local & private](https://img.shields.io/badge/100%25-local%20%26%20private-success.svg)
+![Languages](https://img.shields.io/badge/languages-中文%20%7C%20English-informational.svg)
 
-<br>
+一款在 Home Assistant 中运行、本地优先的个人记账工具。
 
-**One-click install — add the repository to your Home Assistant:**
+A local-first personal finance tracker running as a Home Assistant add-on.
 
-[![Open your Home Assistant instance and add this add-on repository.](images/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faemediatodd%2FMEMO-Finance-Tracker-CN_Chinese)
-
-<br>
-
-If MEMO makes your life easier, you can support its development:
-
-<a href="https://www.buymeacoffee.com/LuMeX88" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee" height="50"></a>
-
-<br><br>
-
-<img src="images/screenshot-reports.png" alt="MEMO dashboard – reports overview with category breakdown and income/expense timeline" width="100%">
+[一键添加到 Home Assistant / Add to Home Assistant](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faemediatodd%2FMEMO-Finance-Tracker-CN_Chinese)
 
 </div>
 
----
+## 中文说明
 
-## ⚠️ Prerequisites
+### 项目定位
 
-MEMO integrates with Home Assistant through **MQTT**. Before installing, make sure you have:
+本仓库不是对上游项目的简单镜像，而是面向中文 Home Assistant 用户维护的衍生版本。
+它保留 MEMO 的本地存储、Ingress、MQTT、报表和项目管理能力，并补充了完整简体中文、
+人民币和中文小票识别支持。
 
-| Requirement | Notes |
+| 项目 | 说明 |
 |---|---|
-| **Home Assistant OS or Supervised** | Required to install add-ons. |
-| **MQTT broker — [Mosquitto add-on](https://github.com/home-assistant/addons/tree/master/mosquitto)** | **Required.** Install *Mosquitto broker* from **Settings → Add-ons → Add-on Store** and start it. |
-| **MQTT integration enabled** | **Settings → Devices & Services → Add Integration → MQTT**, pointed at your broker. This is what turns MEMO's published topics into sensor entities via MQTT Discovery. |
-| **MQTT user / credentials** | Create a Home Assistant user (or Mosquitto local user) for MEMO to authenticate against the broker. |
+| 本项目 | [aemediatodd/MEMO-Finance-Tracker-CN_Chinese](https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese) |
+| 上游项目 | [LuMeX88/MEMO-Finance-Tracker](https://github.com/LuMeX88/MEMO-Finance-Tracker) |
+| 基础版本 | MEMO 1.4.0 |
+| 许可证 | GNU GPL v3 |
+| 维护关系 | 独立维护，不代表上游作者 |
 
-> Without a running MQTT broker (Mosquitto) and the MQTT integration, MEMO still works as a finance app, but **no Home Assistant sensor entities will be created**.
+详细归属和修改范围见 [NOTICE.md](NOTICE.md)。
 
----
+### 中文版新增内容
 
-## 🤔 Why MEMO?
+- 完整简体中文界面，默认语言为 `zh-CN`。
+- 默认货币为人民币 `CNY`，金额和 Home Assistant MQTT 传感器使用 `¥`。
+- 中文小票 OCR，使用 `chi_sim + eng + deu`，并识别中文合计和金额关键词。
+- 中文日期、月份、季度、通知和无障碍标签。
+- 修复窄屏手机上设置页面的布局问题。
+- 保留英语和德语，可在设置页面切换语言与货币。
 
-Most finance apps live in the cloud, share your data, and cost a monthly fee. MEMO is different. It runs on your own hardware, stores everything locally in SQLite, and integrates natively with Home Assistant — including single sign-on through the Home Assistant sidebar (Ingress). Your data never leaves your home.
+### 主要功能
 
----
+- 快速记录收入和支出，并按类型、分类、项目、收款方和时间筛选。
+- 仪表盘展示收入、支出、余额和趋势。
+- 管理周期性支出，并根据历史交易生成建议。
+- 使用看板或瀑布模式管理项目预算、计划成本与实际成本。
+- 按月、季度和年度预测支出。
+- 在浏览器本地导出 CSV 和 PDF 报表。
+- 通过摄像头或图片识别小票；可选本地视觉 AI 提升识别效果。
+- JSON 数据备份与恢复。
+- 通过 MQTT Discovery 创建 Home Assistant 金额和交易数量传感器。
+- 所有账本数据默认保存在加载项的 SQLite 数据库中。
 
-## ✨ Features
+### 安装要求
 
-- **📊 Dashboard** – Real-time overview of income, expenses, balance and trends.
-- **💸 Transactions** – Log income and expenses with category, recipient, payment
-  method and notes. Filter by type, category, project, recipient and period
-  (month / quarter / year / custom).
-- **🔁 Schedules** – Manage recurring costs (rent, subscriptions, utilities) with
-  fixed or variable amounts, plus **smart suggestions** that detect recurring
-  patterns in your transactions and offer to turn them into schedules.
-- **📁 Projects (Kanban & Waterfall)** – Plan work as a Kanban board or a
-  Waterfall timeline, set a **budget**, and track **forecast vs booked** costs.
-  Allocate each task's cost to a **category**, give Kanban tasks an **estimated
-  completion date**, and have those planned costs flow into your expense forecast.
-- **📈 Forecasting** – Automatic monthly, quarterly and yearly expense forecast
-  from schedules, spending averages **and planned project task costs**.
-- **🧾 Reports & Export** – Income/expense totals, monthly averages, biggest
-  transactions, expenses by category, timelines, period comparisons and one-click
-  **CSV / PDF export** (generated locally in your browser).
-- **🏷️ Categories** – Fully customizable categories with icons and colors, plus a
-  one-click set of **best-practice budgeting categories**.
-- **📷 Receipt Scanning (OCR)** – Capture a receipt with your **camera** or pick an
-  existing **image file**. Local Tesseract + OpenCV pre-processing auto-fills
-  amount, date and recipient as a suggestion.
-- **🧠 Embedded Local AI** *(optional, off by default)* – An on-device **vision**
-  model (Qwen2.5-VL-3B) runs **inside the add-on** – no Ollama, no cloud. It reads
-  the **amount, date and merchant straight from a receipt photo**, auto-categorizes
-  new transactions and writes a short monthly insight. **Enable it from Settings**
-  when you want it – a popup shows the system requirements first, and the ~2.8 GB
-  model is then downloaded **on demand** with a live **progress bar**.
-- **🧪 Demo data** – One-click **load/remove** of realistic sample data so you can
-  explore every feature, removed again without touching data you created.
-- **💾 Backup & Restore** – Download all your data as JSON and restore it again.
-- **🛰️ MQTT Sensor Entities** – Key metrics published to Home Assistant via MQTT
-  Discovery (see below).
-- **🔐 Home Assistant Ingress** – Open MEMO straight from the HA sidebar;
-  authentication handled by Home Assistant.
-- **🌍 Multilingual** – German & English, with **light / dark** mode.
+- Home Assistant OS 或 Home Assistant Supervised。
+- 已安装并运行 MQTT broker，推荐官方 Mosquitto broker 加载项。
+- 已在 Home Assistant 中配置 MQTT 集成。
 
----
+没有 MQTT 时，MEMO 的记账界面仍可使用，但不会创建 Home Assistant MQTT 传感器。
 
-## � Screenshots
+### 安装
 
-<table>
-  <tr>
-    <td width="50%"><img src="images/screenshot-transactions.png" width="100%" alt="Transactions list with type, category, project and merchant filters"><br><sub><b>Transactions</b> — filter by type, category, project, merchant & period</sub></td>
-    <td width="50%"><img src="images/screenshot-quickadd.png" width="100%" alt="Quick-add speed dial"><br><sub><b>Quick add</b> — speed dial for expense, income, receipt scan, project & category</sub></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="images/screenshot-schedules.png" width="100%" alt="Recurring costs with a forecast chart"><br><sub><b>Recurring costs</b> — schedules with a 1–12 month forecast</sub></td>
-    <td width="50%"><img src="images/screenshot-forecast.png" width="100%" alt="Expense forecast, period comparison and CSV/PDF export"><br><sub><b>Reports & forecast</b> — period comparison, CSV/PDF export, expense forecast</sub></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="images/screenshot-projects.png" width="100%" alt="Projects as Kanban and Waterfall with an activity heatmap"><br><sub><b>Projects</b> — Kanban / Waterfall, budget vs booked, activity heatmap</sub></td>
-    <td width="50%"><img src="images/screenshot-categories.png" width="100%" alt="Customizable categories with icons and colors"><br><sub><b>Categories</b> — fully customizable with icons & colors</sub></td>
-  </tr>
-  <tr>
-    <td width="50%"><img src="images/screenshot-settings.png" width="100%" alt="Settings with local AI toggle, backup/restore and demo data"><br><sub><b>Settings</b> — local AI toggle, backup/restore, demo data & suggested categories</sub></td>
-    <td width="50%"></td>
-  </tr>
-</table>
+点击页面顶部的 Home Assistant 链接，或手动操作：
 
----
+1. 打开 **设置 -> 加载项 -> 加载项商店**。
+2. 打开右上角菜单，选择 **仓库**。
+3. 添加以下地址：
 
-## �🚀 Installation
-
-### Option A — one-click (recommended)
-
-Click the button below to open your Home Assistant and add the MEMO repository,
-then install the add-on from the store:
-
-[![Open your Home Assistant instance and add this add-on repository.](images/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faemediatodd%2FMEMO-Finance-Tracker-CN_Chinese)
-
-### Option B — manual
-
-1. In Home Assistant, go to **Settings → Add-ons → Add-on Store**.
-2. Open the **⋮ menu (top-right) → Repositories**, paste this URL and click **Add**:
-   ```
+   ```text
    https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese
    ```
-3. Find **MEMO – Finance Tracker** in the store and click **Install**.
 
-### After installing
+4. 找到 **MEMO - Finance Tracker 中文版** 并安装。
+5. 在加载项配置页填写 MQTT 设置，保存后启动加载项。
+6. 从侧边栏或 **打开 Web UI** 进入 MEMO。
 
-1. Make sure the **Mosquitto broker** add-on is installed and **running** (see
-   [Prerequisites](#️-prerequisites)).
-2. Open the MEMO **Configuration** tab and set your MQTT details (see below).
-   Leave the username/password empty to inherit them from the broker add-on.
-3. Click **Save**, then **Start** the add-on.
-4. Check the **Log** tab to confirm it started cleanly.
-5. Open the UI from the **sidebar** (Ingress) or the **Open Web UI** button.
+本地安装和升级说明见
+[memo-finance-tracker/INSTALL-ZH-CN.md](memo-finance-tracker/INSTALL-ZH-CN.md)。
 
-> 💡 Home Assistant only rebuilds the add-on when the version changes. After an
-> update isn't showing, use **⋮ → Check for updates** in the Add-on Store.
+### 配置
 
----
+| 配置项 | 默认值 | 说明 |
+|---|---:|---|
+| `ai_enabled` | `false` | 启用可选本地视觉 AI。首次启用会下载约 2.8 GB 模型。 |
+| `mqtt_host` | `core-mosquitto` | MQTT broker 主机名。 |
+| `mqtt_port` | `1883` | MQTT broker 端口。 |
+| `mqtt_username` | 空 | MQTT 用户名；留空时尝试继承 Mosquitto 服务凭据。 |
+| `mqtt_password` | 空 | MQTT 密码；留空时尝试继承 Mosquitto 服务凭据。 |
+| `mqtt_base_topic` | `memo` | MQTT 主题前缀。 |
+| `mqtt_discovery_prefix` | `homeassistant` | Home Assistant MQTT Discovery 前缀。 |
+| `mqtt_currency` | `¥` | MQTT 金额传感器单位。 |
+| `mqtt_publish_interval` | `300` | 指标重新发布间隔，单位为秒。 |
 
-## ⚙️ Configuration
+网页中的货币需要在 MEMO 的 **设置 -> 常规** 中选择。修改 `mqtt_currency` 不会换算
+已有金额，也不会改变网页货币。
 
-The add-on exposes the following options:
+### 数据、备份与隐私
 
-| Option | Default | Description |
-|---|---|---|
-| `ai_enabled` | `false` | Enable the embedded local **vision** AI (receipt reading, auto-categorization, monthly insight). **Off by default** — enabling it triggers a one-time ~2.8 GB model download (shown with a progress bar in **Settings → AI (local)**) and needs ~4 GB free RAM. Can also be toggled in **Settings**. |
-| `mqtt_host` | `core-mosquitto` | Hostname of your MQTT broker. Use `core-mosquitto` for the official Mosquitto add-on. |
-| `mqtt_port` | `1883` | MQTT broker port. |
-| `mqtt_username` | – | MQTT username (a Home Assistant / Mosquitto user). |
-| `mqtt_password` | – | MQTT password. |
-| `mqtt_base_topic` | `memo` | Base topic MEMO publishes to. |
-| `mqtt_discovery_prefix` | `homeassistant` | Home Assistant MQTT Discovery prefix. |
-| `mqtt_currency` | `¥` | Currency unit used for the monetary sensors. |
-| `mqtt_publish_interval` | `300` | How often (in seconds) metrics are re-published. |
+- SQLite 数据库位于加载项持久化目录 `/data/memo.db`。
+- 数据会包含在 Home Assistant 的加载项备份中。
+- 建议升级前同时创建 Home Assistant 备份并从 MEMO 导出 JSON。
+- 项目没有账户、遥测或云同步。
+- 仅在用户主动启用本地 AI 时，需要联网下载一次模型；推理在本机完成。
 
-The SQLite database is stored in the add-on's persistent `/data` volume and is included in Home Assistant backups.
+### 本地 AI
 
----
+本地 AI 默认关闭。它使用 Qwen2.5-VL-3B-Instruct GGUF 和 `llama.cpp`，用于小票读取、
+自动分类和月度摘要。建议预留约 4 GB 内存、3 GB 磁盘空间，并使用支持 AVX2 的 64 位 CPU。
+硬件不足时保持关闭即可，普通 Tesseract OCR 和其他记账功能仍然可用。
 
-## 📊 Home Assistant Sensor Entities
+### Home Assistant 传感器
 
-Once MQTT is configured, MEMO registers a **MEMO Finance Tracker** device with these sensors via MQTT Discovery:
+配置 MQTT 后会创建：
 
 ```yaml
-sensor.memo_income_this_month          # device_class: monetary
-sensor.memo_expenses_this_month        # device_class: monetary
-sensor.memo_balance_this_month         # device_class: monetary
-sensor.memo_transactions_this_month    # count of transactions this month
+sensor.memo_income_this_month
+sensor.memo_expenses_this_month
+sensor.memo_balance_this_month
+sensor.memo_transactions_this_month
 ```
 
-These can be used directly in dashboards, history graphs and automations (e.g. "notify me when monthly expenses exceed €X").
+## English
 
----
+### About this edition
 
-## 🧠 Local AI (optional, 100% on-device)
+This repository is a maintained derivative for Chinese-speaking Home Assistant
+users, not a mirror and not an official upstream localization. It keeps MEMO's
+local storage, Ingress, MQTT, reporting, and project-management features while
+adding Simplified Chinese, CNY defaults, and Chinese receipt recognition.
 
-MEMO can run a small embedded **vision** language model so smart features work **without any cloud service or separate Ollama container**. It is **off by default** — turn it on in the add-on configuration or via **Settings → AI (local)** (a popup shows the system requirements first).
-
-- **Model:** Qwen2.5-VL-3B-Instruct (GGUF, Q4_K_M, ~1.9 GB) plus its vision encoder / mmproj (~850 MB), running via `llama.cpp` on CPU.
-- **First enable:** the model is downloaded **on demand** — only the moment you switch the AI on — into the persistent `/data/models` volume, with a live **progress bar** in **Settings → AI (local)**. This keeps the initial add-on install fast and makes the AI a deliberate choice. This is the **only** time MEMO touches the network for AI; all inference happens locally afterwards. The download runs in the background and never blocks the app.
-- **What it does (the AI features):**
-  - **Receipt scan (OCR)** – reads the **amount, date and merchant directly from a receipt photo** with the vision model. Far more accurate than plain text OCR.
-  - **Auto-categorization** – when you add a transaction without picking a category, the model suggests the best-matching one (falling back to a default if unsure).
-  - **Monthly insight** – an "AI Insight" card on the dashboard summarizes the last 30 days in two or three sentences with one saving tip.
-- **Without AI:** receipt scanning still works using the lightweight **Tesseract OCR + regex** fallback (no big download, fast even on weak hardware); categorization falls back to a default and the insight card simply invites you to enable AI.
-- **Disable it:** set `ai_enabled: false` in the add-on configuration, or use the **AI (local)** toggle under **Settings**. Every AI feature then degrades gracefully and the rest of the app keeps working.
-
----
-
-## ⚙️ System requirements for the AI features (local)
-
-The on-device AI is optional and **off by default**. To turn it on, your Home Assistant host should meet roughly these requirements:
-
-| Resource | Recommended | Notes |
-|---|---|---|
-| **Free RAM** | **~4 GB** free for MEMO | The 3B vision model needs ~3.5 GB resident while loaded. |
-| **CPU** | 64-bit, modern (**AVX2**) | Runs CPU-only. On a Proxmox VM set the CPU type to **host** so AVX2 is available — otherwise inference is much slower (or the model may fail to load). |
-| **Disk** | **~3 GB** free in `/data` | One-time download (model ~1.9 GB + vision encoder ~850 MB), stored in `/data/models`. |
-| **Network** | once, for the download | Only the first-time model download; all inference is then 100% local / offline. |
-
-> ⏱️ **It can be slow.** Depending on your hardware, the **first model load** and **every AI action** can take noticeably longer — on weak CPUs (few cores, no AVX2) up to **a minute per receipt**. If the receipt-scan AI step exceeds its time budget, MEMO automatically falls back to the fast Tesseract OCR result. If your hardware is limited, simply keep the AI features **off**.
-
----
-
-## 📁 Project management (Kanban & Waterfall)
-
-Open any project to plan and cost out larger goals (a renovation, a trip, a build):
-
-- **Two modes** – a **Kanban** board (To Do / In Progress / Done columns with
-  drag & drop) or a **Waterfall** timeline sorted by date.
-- **Budget & cost tracking** – set a project budget and watch the bar fill as
-  costs move from **forecast** (planned) to **booked** (actual).
-- **Booked costs become real bookings** – when a task is *done* (Kanban) or its
-  end date passes (Waterfall), its cost is mirrored into a normal **expense
-  booking**, so it shows up in Transactions, Reports and the budget bar.
-- **Category allocation** – give each task a **category**; its booked cost is
-  filed there instead of a generic "Other", keeping *Expenses by Category* useful.
-- **Time-based forecast** – give a task an **estimated completion date** and its
-  planned cost is projected into the **expense forecast** for that month.
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology |
+| Item | Details |
 |---|---|
-| Frontend | React + TypeScript + Vite + Tailwind CSS |
-| Backend | FastAPI (serves both the REST API and the built frontend) |
-| Database | SQLite (local, in `/data`) |
-| OCR (fallback) | Tesseract via pytesseract + OpenCV pre-processing + Pillow |
-| Local AI (optional) | llama.cpp (`llama-cpp-python`) + Qwen2.5-VL-3B-Instruct GGUF (vision) |
-| Pattern Matching | rapidfuzz |
-| HA Integration | MQTT Discovery (paho-mqtt) + Ingress |
-| Auth | Home Assistant (via Ingress) |
+| This project | [aemediatodd/MEMO-Finance-Tracker-CN_Chinese](https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese) |
+| Upstream | [LuMeX88/MEMO-Finance-Tracker](https://github.com/LuMeX88/MEMO-Finance-Tracker) |
+| Base version | MEMO 1.4.0 |
+| License | GNU GPL v3 |
+| Relationship | Independently maintained; does not represent upstream |
 
-The add-on runs as a **single container**: FastAPI serves the compiled React app and the API on one port, which Home Assistant exposes through Ingress.
+See [NOTICE.md](NOTICE.md) for attribution and the complete modification scope.
 
----
+### Changes in the Chinese edition
 
-## 💻 Development / Standalone
+- Complete Simplified Chinese interface with `zh-CN` as the default locale.
+- CNY as the default currency and `¥` for Home Assistant MQTT monetary sensors.
+- Chinese receipt OCR using `chi_sim + eng + deu`, including Chinese total keywords.
+- Localized dates, months, quarters, notifications, and accessibility labels.
+- Responsive fixes for the Settings page on narrow mobile screens.
+- English and German remain available from Settings.
 
-MEMO can also run outside Home Assistant for development.
+### Features
 
-**Docker (standalone):**
-```bash
-docker compose up --build
-# frontend: http://localhost:3000   backend: http://localhost:8000
+- Fast income and expense entry with type, category, project, recipient, and date filters.
+- Dashboard for income, expenses, balance, and trends.
+- Recurring schedules and pattern-based suggestions.
+- Kanban and waterfall project planning with budgets and forecast-versus-booked costs.
+- Monthly, quarterly, and yearly expense forecasts.
+- Local CSV and PDF report export in the browser.
+- Receipt scanning from camera or image, with optional on-device vision AI.
+- JSON backup and restore.
+- Home Assistant sensors through MQTT Discovery.
+- Local SQLite storage in the add-on's persistent data volume.
+
+### Requirements
+
+- Home Assistant OS or Home Assistant Supervised.
+- A running MQTT broker; the official Mosquitto broker add-on is recommended.
+- The MQTT integration configured in Home Assistant.
+
+MEMO still works as a finance application without MQTT, but Home Assistant MQTT
+sensor entities will not be created.
+
+### Installation
+
+Use the Home Assistant link at the top of this page, or install manually:
+
+1. Open **Settings -> Add-ons -> Add-on Store**.
+2. Open the top-right menu and choose **Repositories**.
+3. Add:
+
+   ```text
+   https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese
+   ```
+
+4. Install **MEMO - Finance Tracker Chinese Edition**.
+5. Configure MQTT, save the configuration, and start the add-on.
+6. Open MEMO from the sidebar or **Open Web UI**.
+
+See [memo-finance-tracker/INSTALL-ZH-CN.md](memo-finance-tracker/INSTALL-ZH-CN.md)
+for local installation and upgrade instructions.
+
+### Configuration
+
+| Option | Default | Description |
+|---|---:|---|
+| `ai_enabled` | `false` | Enable the optional local vision AI. The first enable downloads about 2.8 GB. |
+| `mqtt_host` | `core-mosquitto` | MQTT broker hostname. |
+| `mqtt_port` | `1883` | MQTT broker port. |
+| `mqtt_username` | empty | MQTT username; leave empty to inherit Mosquitto service credentials. |
+| `mqtt_password` | empty | MQTT password; leave empty to inherit Mosquitto service credentials. |
+| `mqtt_base_topic` | `memo` | MQTT base topic. |
+| `mqtt_discovery_prefix` | `homeassistant` | Home Assistant MQTT Discovery prefix. |
+| `mqtt_currency` | `¥` | Unit used by MQTT monetary sensors. |
+| `mqtt_publish_interval` | `300` | Metric republish interval in seconds. |
+
+The web application's currency is selected under **Settings -> General**.
+Changing `mqtt_currency` neither converts existing amounts nor changes the web currency.
+
+### Data, backups, and privacy
+
+- The SQLite database is stored at `/data/memo.db` in the persistent add-on volume.
+- Home Assistant add-on backups include this data.
+- Before upgrading, create a Home Assistant backup and export JSON from MEMO.
+- There are no accounts, telemetry, or cloud synchronization.
+- Network access for AI is needed only for the model download initiated by the user;
+  inference then runs locally.
+
+### Local AI
+
+Local AI is disabled by default. It uses Qwen2.5-VL-3B-Instruct GGUF with
+`llama.cpp` for receipt reading, auto-categorization, and monthly insights.
+Allow roughly 4 GB of RAM, 3 GB of disk space, and a modern 64-bit AVX2 CPU.
+Leave it disabled on limited hardware; Tesseract OCR and the rest of MEMO continue to work.
+
+### Home Assistant sensors
+
+After MQTT is configured, MEMO creates:
+
+```yaml
+sensor.memo_income_this_month
+sensor.memo_expenses_this_month
+sensor.memo_balance_this_month
+sensor.memo_transactions_this_month
 ```
 
-**Local dev (hot reload):**
+## Screenshots / 界面截图
+
+| Transactions / 交易 | Reports / 报表 |
+|---|---|
+| ![Transactions](images/screenshot-transactions.png) | ![Reports](images/screenshot-reports.png) |
+
+| Projects / 项目 | Settings / 设置 |
+|---|---|
+| ![Projects](images/screenshot-projects.png) | ![Settings](images/screenshot-settings.png) |
+
+## Development / 开发
+
 ```bash
-# Backend
-cd backend
+# Standalone Docker / 独立 Docker 运行
+docker compose up --build
+
+# Backend / 后端
+cd memo-finance-tracker/backend
 python -m uvicorn app.main:app --reload --port 8000
 
-# Frontend (separate terminal)
-cd frontend
+# Frontend / 前端
+cd memo-finance-tracker/frontend
 npm install
-npm run dev          # http://localhost:5173 (proxies /api to :8000)
+npm run dev
 ```
 
-To enable MQTT in standalone/dev mode, copy `backend/.env.example` to `backend/.env` and set `MQTT_HOST` (and credentials). If `MQTT_HOST` is empty, the MQTT feature stays disabled and the app runs normally.
+## Support and attribution / 支持与归属
 
----
+- 中文衍生版问题请提交到本仓库的
+  [Issues](https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese/issues)。
+- Issues for this Chinese derivative belong in this repository's
+  [issue tracker](https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese/issues).
+- 如需支持原项目作者，可访问
+  [LuMeX88 的赞助页面](https://www.buymeacoffee.com/LuMeX88)。
+- To support the upstream author, visit
+  [LuMeX88's sponsorship page](https://www.buymeacoffee.com/LuMeX88).
 
-## ✅ Tested environments
+## License / 许可证
 
-MEMO's interface is actively tested on:
+原始代码和本项目修改均按照 **GNU General Public License v3.0** 分发。
+保留版权、许可证和源码提供义务。详见 [LICENSE](LICENSE) 和 [NOTICE.md](NOTICE.md)。
 
-- **Google Chrome** (desktop)
-- **Microsoft Edge** (desktop)
-- **Home Assistant Companion app** (Android)
-
-Other modern browsers are expected to work but are not regularly tested. The
-in-app receipt camera requires camera permission to be granted to the Home
-Assistant Companion app's webview.
-
----
-
-## ☕ Support
-
-MEMO is free and open-source. If it helps you stay on top of your finances,
-consider buying me a coffee — it genuinely helps and is hugely appreciated. 🙏
-
-<a href="https://www.buymeacoffee.com/LuMeX88" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy me a coffee" height="60"></a>
-
----
-
-## 🧭 Philosophy
-
-> local. private. yours.
-
-MEMO is built on the belief that your financial data belongs to you and only you. No accounts, no sync, no telemetry. Everything runs on your own machine, backed up with your Home Assistant backup.
-
----
-
-## 📄 License
-
-GNU GENERAL PUBLIC LICENSE Version 3
+The upstream code and this project's modifications are distributed under the
+**GNU General Public License v3.0**. Preserve copyright, license, and source
+availability requirements. See [LICENSE](LICENSE) and [NOTICE.md](NOTICE.md).
