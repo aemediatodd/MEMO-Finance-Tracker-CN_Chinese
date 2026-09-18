@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.4.0-cn.1
+
+- Added complete Simplified Chinese interface translations.
+- Added CNY/RMB formatting and a default `¥` MQTT sensor unit.
+- Added Simplified Chinese receipt OCR and Chinese amount keywords.
+- Localized date, month, quarter, notification, and accessibility labels.
+- Fixed the settings layout on narrow mobile screens.
+- Added Chinese installation documentation and upstream attribution.
+
 ## 1.4.0 - 2026-06-24
 
 - **New – Vision AI for receipt scanning:** the optional on-device AI is now a

@@ -1,3 +1,11 @@
+> [!IMPORTANT]
+> This repository contains an independent Chinese localization derived from
+> [LuMeX88/MEMO-Finance-Tracker](https://github.com/LuMeX88/MEMO-Finance-Tracker).
+> It adds Simplified Chinese, CNY/RMB support, Chinese receipt OCR, and related
+> mobile layout fixes. It is not affiliated with or endorsed by the upstream
+> maintainer. The original and modified code remain licensed under GNU GPL v3;
+> see [LICENSE](LICENSE), [NOTICE.md](NOTICE.md), and the source history.
+
 <div align="center">
 
 # 💰 MEMO – Finance Tracker
@@ -16,7 +24,7 @@ automations.
 &nbsp;
 [![Home Assistant Add-on](https://img.shields.io/badge/Home%20Assistant-Add--on-41BDF5?logo=home-assistant&logoColor=white)](https://www.home-assistant.io/)
 &nbsp;
-![Version](https://img.shields.io/badge/version-1.4.0-success.svg)
+![Version](https://img.shields.io/badge/version-1.4.0--cn.1-success.svg)
 &nbsp;
 ![Local & private](https://img.shields.io/badge/100%25-local%20%26%20private-success.svg)
 
@@ -24,7 +32,7 @@ automations.
 
 **One-click install — add the repository to your Home Assistant:**
 
-[![Open your Home Assistant instance and add this add-on repository.](images/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FLuMeX88%2FMEMO-Finance-Tracker)
+[![Open your Home Assistant instance and add this add-on repository.](images/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faemediatodd%2FMEMO-Finance-Tracker-CN_Chinese)
 
 <br>
 
@@ -131,14 +139,14 @@ Most finance apps live in the cloud, share your data, and cost a monthly fee. ME
 Click the button below to open your Home Assistant and add the MEMO repository,
 then install the add-on from the store:
 
-[![Open your Home Assistant instance and add this add-on repository.](images/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FLuMeX88%2FMEMO-Finance-Tracker)
+[![Open your Home Assistant instance and add this add-on repository.](images/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Faemediatodd%2FMEMO-Finance-Tracker-CN_Chinese)
 
 ### Option B — manual
 
 1. In Home Assistant, go to **Settings → Add-ons → Add-on Store**.
 2. Open the **⋮ menu (top-right) → Repositories**, paste this URL and click **Add**:
    ```
-   https://github.com/LuMeX88/MEMO-Finance-Tracker
+   https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese
    ```
 3. Find **MEMO – Finance Tracker** in the store and click **Install**.
 
@@ -170,7 +178,7 @@ The add-on exposes the following options:
 | `mqtt_password` | – | MQTT password. |
 | `mqtt_base_topic` | `memo` | Base topic MEMO publishes to. |
 | `mqtt_discovery_prefix` | `homeassistant` | Home Assistant MQTT Discovery prefix. |
-| `mqtt_currency` | `€` | Currency unit used for the monetary sensors. |
+| `mqtt_currency` | `¥` | Currency unit used for the monetary sensors. |
 | `mqtt_publish_interval` | `300` | How often (in seconds) metrics are re-published. |
 
 The SQLite database is stored in the add-on's persistent `/data` volume and is included in Home Assistant backups.

@@ -17,8 +17,8 @@ class AppSettings(Base):
     __tablename__ = "app_settings"
 
     id = Column(Integer, primary_key=True, index=True)
-    currency = Column(String, nullable=False, default="CHF")
-    language = Column(String, nullable=False, default="de")
+    currency = Column(String, nullable=False, default="CNY")
+    language = Column(String, nullable=False, default="zh-CN")
     theme = Column(String, nullable=False, default="light")
     default_category_id = Column(Integer, nullable=True)
     updated_at = Column(

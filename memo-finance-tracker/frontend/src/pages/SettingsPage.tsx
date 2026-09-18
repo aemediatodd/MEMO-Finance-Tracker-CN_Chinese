@@ -43,14 +43,14 @@ function SettingRow({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex items-center justify-between gap-4 py-3.5 border-b border-gray-100 dark:border-gray-700/50 last:border-0">
+    <div className="flex flex-col items-stretch gap-3 py-3.5 border-b border-gray-100 dark:border-gray-700/50 last:border-0 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
       <div className="flex-1 min-w-0">
         <p className="text-sm font-medium text-gray-900 dark:text-white">{label}</p>
         {description && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">{description}</p>
         )}
       </div>
-      <div className="flex-shrink-0">{children}</div>
+      <div className="flex-shrink-0 w-full sm:w-auto [&>select]:w-full">{children}</div>
     </div>
   )
 }
@@ -336,6 +336,7 @@ export default function SettingsPage() {
             }}
             className={selectClass}
           >
+            <option value="CNY">CNY - 人民币</option>
             <option value="CHF">CHF – Schweizer Franken / Swiss Franc</option>
             <option value="EUR">EUR – Euro</option>
             <option value="USD">USD – US-Dollar / US Dollar</option>
@@ -354,6 +355,7 @@ export default function SettingsPage() {
           >
             <option value="de">Deutsch</option>
             <option value="en">English</option>
+            <option value="zh-CN">简体中文</option>
           </select>
         </SettingRow>
 
@@ -592,7 +594,7 @@ export default function SettingsPage() {
 
         <SettingRow label={t('settings.docs')}>
           <a
-            href="https://github.com/LuMeX88/MEMO-Finance-Tracker/blob/main/memo-finance-tracker/DOCS.md"
+            href="https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese/blob/main/memo-finance-tracker/DOCS.md"
             target="_blank"
             rel="noreferrer"
             className="flex items-center gap-1.5 text-sm text-primary-600 dark:text-primary-400 hover:underline"

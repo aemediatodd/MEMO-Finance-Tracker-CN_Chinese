@@ -107,7 +107,7 @@ export default function SpeedDial() {
         {/* Main FAB */}
         <button
           onClick={() => setOpen((o) => !o)}
-          aria-label={open ? 'Schliessen' : 'Aktionen'}
+          aria-label={open ? t('common.close') : t('action.actions')}
           aria-expanded={open}
           className={cn(
             'w-16 h-16 rounded-full shadow-2xl flex items-center justify-center transition-all duration-300 focus:outline-none',
@@ -122,4 +122,3 @@ export default function SpeedDial() {
     </>
   )
 }
-

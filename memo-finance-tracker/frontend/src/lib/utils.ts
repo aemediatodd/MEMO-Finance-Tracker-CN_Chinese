@@ -1,6 +1,6 @@
 import { clsx, type ClassValue } from 'clsx'
 import { twMerge } from 'tailwind-merge'
-import { format, differenceInCalendarDays, parseISO } from 'date-fns'
+import { differenceInCalendarDays, parseISO } from 'date-fns'
 import { useSettingsStore } from '@/store/useSettingsStore'
 
 export function cn(...inputs: ClassValue[]): string {
@@ -8,12 +8,13 @@ export function cn(...inputs: ClassValue[]): string {
 }
 
 export function localeForLanguage(language: string): string {
+  if (language === 'zh-CN') return 'zh-CN'
   return language === 'en' ? 'en-GB' : 'de-CH'
 }
 
 export function formatCurrency(
   amount: number,
-  currency = 'CHF',
+  currency = 'CNY',
   locale?: string,
 ): string {
   const resolved = locale ?? localeForLanguage(useSettingsStore.getState().language)
@@ -26,7 +27,9 @@ export function formatCurrency(
 }
 
 export function formatDate(dateStr: string): string {
-  return format(parseISO(dateStr), 'dd.MM.yyyy')
+  return new Intl.DateTimeFormat(
+    localeForLanguage(useSettingsStore.getState().language),
+  ).format(parseISO(dateStr))
 }
 
 export function getDaysUntil(dateStr: string): number {
@@ -34,5 +37,8 @@ export function getDaysUntil(dateStr: string): number {
 }
 
 export function getMonthName(dateStr: string): string {
-  return format(parseISO(dateStr), 'MMMM yyyy')
+  return new Intl.DateTimeFormat(
+    localeForLanguage(useSettingsStore.getState().language),
+    { year: 'numeric', month: 'long' },
+  ).format(parseISO(dateStr))
 }

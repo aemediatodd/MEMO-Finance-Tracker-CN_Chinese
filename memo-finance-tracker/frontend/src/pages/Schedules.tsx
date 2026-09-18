@@ -471,7 +471,7 @@ export default function Schedules() {
             value={form.category_id}
             onChange={(e) => setForm((f) => ({ ...f, category_id: e.target.value }))}
           >
-            <option value="">Kategorie wählen</option>
+            <option value="">{t('transaction.categoryPlaceholder')}</option>
             {categories
               .filter((c) => !c.archived)
               .map((c) => (

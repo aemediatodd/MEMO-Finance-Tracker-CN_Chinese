@@ -139,8 +139,8 @@ def extract_amount(text: str) -> Optional[float]:
     """Find the largest monetary amount in OCR text."""
     # Match: CHF 47.30, Total 12,50, 1'234.56, Summe 12.50, etc.
     patterns = [
-        r"(?:CHF|EUR|USD|Fr\.?|€|\$)\s*(\d{1,4}[.,\']\d{2})",
-        r"(?:total|gesamt|betrag|zahlung|summe|sum|amount)[:\s]+(\d{1,4}[.,\']\d{2})",
+        r"(?:CNY|RMB|CHF|EUR|USD|Fr\.?|人民币|￥|¥|€|\$)\s*(\d{1,4}[.,\']\d{2})",
+        r"(?:合计|总计|实付|金额|应付|total|gesamt|betrag|zahlung|summe|sum|amount)[:：\s]+(?:CNY|RMB|￥|¥)?\s*(\d{1,4}[.,\']\d{2})",
         r"\b(\d{1,4}[.,]\d{2})\b",
     ]
     amounts = []
@@ -195,13 +195,8 @@ def _get_ocr_lang() -> str:
     """Return best available Tesseract language string."""
     try:
         langs = pytesseract.get_languages(config="")
-        has_deu = "deu" in langs
-        has_eng = "eng" in langs
-        if has_deu and has_eng:
-            return "deu+eng"
-        if has_deu:
-            return "deu"
-        return "eng"
+        preferred = [lang for lang in ("chi_sim", "eng", "deu") if lang in langs]
+        return "+".join(preferred) if preferred else "eng"
     except Exception:
         return "eng"
 

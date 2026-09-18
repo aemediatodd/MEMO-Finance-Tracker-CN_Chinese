@@ -8,7 +8,7 @@ from app.schemas.settings import SettingsResponse, SettingsUpdate
 router = APIRouter(prefix="/settings", tags=["settings"])
 
 _SETTINGS_ID = 1
-_ALLOWED_LANGUAGES = {"de", "en"}
+_ALLOWED_LANGUAGES = {"de", "en", "zh-CN"}
 _ALLOWED_THEMES = {"light", "dark"}
 
 

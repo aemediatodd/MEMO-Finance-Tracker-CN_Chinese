@@ -32,8 +32,8 @@ function persistToServer(data: Partial<Omit<AppSettings, 'updated_at'>>) {
 export const useSettingsStore = create<SettingsState>()(
   persist(
     (set) => ({
-      currency: 'CHF',
-      language: 'de',
+      currency: 'CNY',
+      language: 'zh-CN',
       theme: 'light',
       defaultCategoryId: null,
       hydrated: false,

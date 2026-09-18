@@ -48,7 +48,7 @@ categorization and insights – all running 100% on your own hardware.
 
 1. In Home Assistant go to **Settings → Add-ons → Add-on Store**.
 2. Open the three-dot menu → **Repositories** and add:
-   `https://github.com/LuMeX88/MEMO-Finance-Tracker`
+   `https://github.com/aemediatodd/MEMO-Finance-Tracker-CN_Chinese`
 3. Install **MEMO – Finance Tracker** from the store.
 4. Adjust the configuration (see below) and **Start** the add-on.
 5. Open the UI from the sidebar (ingress) or the add-on **Open Web UI** button.
@@ -64,7 +64,7 @@ categorization and insights – all running 100% on your own hardware.
 | `mqtt_password` | MQTT password (leave empty to inherit from the MQTT service) | _empty_ |
 | `mqtt_base_topic` | Base topic for state/availability | `memo` |
 | `mqtt_discovery_prefix` | Home Assistant MQTT discovery prefix | `homeassistant` |
-| `mqtt_currency` | Currency symbol used as the sensor unit | `€` |
+| `mqtt_currency` | Currency symbol used as the sensor unit | `¥` |
 | `mqtt_publish_interval` | Seconds between metric updates | `300` |
 
 > Leave `mqtt_username` and `mqtt_password` **empty** to automatically use the

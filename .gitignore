@@ -10,6 +10,8 @@ __pycache__/
 node_modules/
 dist/
 .env.local
+pnpm-lock.yaml
+pnpm-workspace.yaml
 
 # IDE
 .vscode/

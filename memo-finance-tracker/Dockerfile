@@ -36,7 +36,7 @@ ENV LANG=C.UTF-8 \
 
 # System packages:
 #  - python3 + venv + pip       -> backend runtime
-#  - tesseract-ocr + eng/deu    -> receipt OCR (engine + trained languages)
+#  - tesseract-ocr + chi_sim/eng/deu -> receipt OCR (engine + trained languages)
 #  - libglib2.0-0               -> runtime lib for opencv-python-headless
 #  - build-essential + cmake    -> compile llama-cpp-python (CPU-only)
 # build-essential/cmake are purged again after the Python deps are compiled to
@@ -49,6 +49,7 @@ RUN apt-get update \
         python3-venv \
         python3-pip \
         tesseract-ocr \
+        tesseract-ocr-chi-sim \
         tesseract-ocr-eng \
         tesseract-ocr-deu \
         libglib2.0-0 \

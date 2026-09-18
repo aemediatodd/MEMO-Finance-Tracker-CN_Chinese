@@ -1,11 +1,13 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query'
 import { getSuggestions, respondSuggestion } from '@/lib/api'
 import { useUIStore } from '@/store/useUIStore'
+import { useT, type TKey } from '@/lib/i18n'
 import SuggestionCard from './SuggestionCard'
 
 export default function SuggestionBanner() {
   const queryClient = useQueryClient()
   const addToast = useUIStore((s) => s.addToast)
+  const t = useT()
 
   const { data: suggestions = [] } = useQuery({
     queryKey: ['suggestions'],
@@ -19,12 +21,12 @@ export default function SuggestionBanner() {
   async function handleRespond(id: number, action: 'accept' | 'reject' | 'snooze') {
     await respondSuggestion(id, action)
     await queryClient.invalidateQueries({ queryKey: ['suggestions'] })
-    const messages: Record<typeof action, string> = {
-      accept: 'Dauerauftrag erstellt',
-      reject: 'Vorschlag abgelehnt',
-      snooze: 'Vorschlag zurückgestellt',
+    const messageKeys: Record<typeof action, TKey> = {
+      accept: 'suggestions.accepted',
+      reject: 'suggestions.rejected',
+      snooze: 'suggestions.snoozed',
     }
-    addToast(messages[action], 'success')
+    addToast(t(messageKeys[action]), 'success')
   }
 
   return (

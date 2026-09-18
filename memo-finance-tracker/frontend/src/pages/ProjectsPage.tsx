@@ -258,7 +258,7 @@ function ActivityHeatmap() {
                     key={di}
                     type="button"
                     onClick={() => navigate(`/transactions?start=${key}&end=${key}`)}
-                    title={`${format(day, 'dd.MM.yyyy')}: ${formatCurrency(amount, currency)}`}
+                    title={`${formatDate(format(day, 'yyyy-MM-dd'))}: ${formatCurrency(amount, currency)}`}
                     className={`w-3 h-3 rounded-sm cursor-pointer transition-opacity hover:opacity-75 hover:ring-1 hover:ring-primary-400 ${getColor(amount)}`}
                   />
                 )
@@ -452,7 +452,7 @@ export default function ProjectsPage() {
                       </span>
                       {proj.end_date && (
                         <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-                          Bis {formatDate(proj.end_date)}
+                          {t('common.to')} {formatDate(proj.end_date)}
                         </p>
                       )}
                       <div className="mt-3">

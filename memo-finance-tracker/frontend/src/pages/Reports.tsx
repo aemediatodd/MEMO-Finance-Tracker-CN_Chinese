@@ -529,7 +529,7 @@ export default function Reports() {
 
       {/* Export */}
       <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-5">
-        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-4">Export</h2>
+        <h2 className="text-base font-semibold text-gray-900 dark:text-white mb-4">{t('reports.export')}</h2>
         <div className="flex flex-wrap gap-3">
           <Button
             variant="secondary"

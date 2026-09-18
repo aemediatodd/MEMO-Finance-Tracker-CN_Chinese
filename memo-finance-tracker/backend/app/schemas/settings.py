@@ -5,8 +5,8 @@ from pydantic import BaseModel, ConfigDict
 
 
 class SettingsBase(BaseModel):
-    currency: str = "CHF"
-    language: str = "de"
+    currency: str = "CNY"
+    language: str = "zh-CN"
     theme: str = "light"
     default_category_id: Optional[int] = None
 

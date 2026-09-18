@@ -30,6 +30,8 @@ import TransactionForm from '@/components/transactions/TransactionForm'
 import TransactionList from '@/components/transactions/TransactionList'
 import type { Transaction } from '@/types'
 import { useT } from '@/lib/i18n'
+import { localeForLanguage } from '@/lib/utils'
+import { useSettingsStore } from '@/store/useSettingsStore'
 
 const PAGE_SIZE = 20
 
@@ -52,11 +54,16 @@ function rangeFor(
   return { start: fmt(startOfYear(anchor)), end: fmt(endOfYear(anchor)) }
 }
 
-function periodLabel(period: Period, anchorStr: string): string {
+function periodLabel(period: Period, anchorStr: string, locale: string): string {
   const anchor = new Date(anchorStr)
-  if (period === 'month') return format(anchor, 'MMMM yyyy')
-  if (period === 'quarter')
-    return `Q${Math.floor(anchor.getMonth() / 3) + 1} ${anchor.getFullYear()}`
+  if (period === 'month')
+    return new Intl.DateTimeFormat(locale, { year: 'numeric', month: 'long' }).format(anchor)
+  if (period === 'quarter') {
+    const quarter = Math.floor(anchor.getMonth() / 3) + 1
+    return locale === 'zh-CN'
+      ? `${anchor.getFullYear()} 年第 ${quarter} 季度`
+      : `Q${quarter} ${anchor.getFullYear()}`
+  }
   return `${anchor.getFullYear()}`
 }
 
@@ -70,6 +77,7 @@ function shiftAnchor(period: Period, anchorStr: string, dir: 1 | -1): string {
 
 export default function Transactions() {
   const t = useT()
+  const locale = localeForLanguage(useSettingsStore((s) => s.language))
   const queryClient = useQueryClient()
   const navigate = useNavigate()
   const addToast = useUIStore((s) => s.addToast)
@@ -280,7 +288,7 @@ export default function Transactions() {
             ‹
           </button>
           <span className="text-sm font-semibold text-gray-800 dark:text-gray-100">
-            {periodLabel(period, anchor)}
+            {periodLabel(period, anchor, locale)}
           </span>
           <button
             type="button"
